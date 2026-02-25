@@ -1544,4 +1544,31 @@
 {"msg":"noderesult","processed_node_count":376,"number_of_nodes_ever_queued":387,"annotation":"MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.VisualScripting.State.Editor.ref.dll_E03858E727F23F6F.mvfrm","index":316,"exitcode":0,"outputfile":"Library/Bee/artifacts/mvdfrm/Unity.VisualScripting.State.Editor.ref.dll_E03858E727F23F6F.mvfrm"}
 {"msg":"newNode","annotation":"MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll.mvfrm","index":318}
 {"msg":"runNodeAction","annotation":"MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll.mvfrm","displayName":"Checking for moved APIs","index":318}
-{"msg":"noderesult","processed_node_count":377,"number_of_nodes_ever_queued":387,"annotation":"MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll.mvfrm","index":318,"exitcode":0,"outputfile":"L
+{"msg":"noderesult","processed_node_count":377,"number_of_nodes_ever_queued":387,"annotation":"MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll.mvfrm","index":318,"exitcode":0,"outputfile":"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll.mvfrm"}
+{"msg":"newNode","annotation":"Csc Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll (+2 others)","index":315}
+{"msg":"cachemiss","annotation":"Csc Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll (+2 others)","index":315,"inputSignature":"08a88887483e281fd0284dbac383d7cd"}
+{"msg":"runNodeAction","annotation":"Csc Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll (+2 others)","displayName":"Compiling C# (Unity.VisualScripting.Shared.Editor)","index":315}
+{"msg":"noderesult","processed_node_count":378,"number_of_nodes_ever_queued":387,"annotation":"Csc Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll (+2 others)","index":315,"exitcode":0,"outputfile":"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Shared.Editor.dll"}
+{"msg":"newNode","annotation":"CopyFiles Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll","index":384}
+{"msg":"runNodeAction","annotation":"CopyFiles Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll","displayName":"Copying Unity.VisualScripting.Shared.Editor.dll","index":384}
+{"msg":"newNode","annotation":"MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.VisualScripting.Shared.Editor.ref.dll_9669F6EBFF6DFFB7.mvfrm","index":330}
+{"msg":"runNodeAction","annotation":"MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.VisualScripting.Shared.Editor.ref.dll_9669F6EBFF6DFFB7.mvfrm","displayName":"Checking for moved APIs","index":330}
+{"msg":"newNode","annotation":"CopyFiles Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.pdb","index":385}
+{"msg":"runNodeAction","annotation":"CopyFiles Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.pdb","displayName":"Copying Unity.VisualScripting.Shared.Editor.pdb","index":385}
+{"msg":"noderesult","processed_node_count":379,"number_of_nodes_ever_queued":387,"annotation":"CopyFiles Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.pdb","index":385,"exitcode":0,"outputfile":"Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.pdb"}
+{"msg":"noderesult","processed_node_count":380,"number_of_nodes_ever_queued":387,"annotation":"CopyFiles Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll","index":384,"exitcode":0,"outputfile":"Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll"}
+{"msg":"noderesult","processed_node_count":381,"number_of_nodes_ever_queued":387,"annotation":"MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.VisualScripting.Shared.Editor.ref.dll_9669F6EBFF6DFFB7.mvfrm","index":330,"exitcode":0,"outputfile":"Library/Bee/artifacts/mvdfrm/Unity.VisualScripting.Shared.Editor.ref.dll_9669F6EBFF6DFFB7.mvfrm"}
+{"msg":"newNode","annotation":"MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm","index":333}
+{"msg":"runNodeAction","annotation":"MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm","displayName":"Checking for moved APIs","index":333}
+{"msg":"noderesult","processed_node_count":382,"number_of_nodes_ever_queued":387,"annotation":"MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm","index":333,"exitcode":0,"outputfile":"Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm"}
+{"msg":"newNode","annotation":"Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)","index":322}
+{"msg":"runNodeAction","annotation":"Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)","displayName":"Compiling C# (Assembly-CSharp)","index":322}
+{"msg":"noderesult","processed_node_count":383,"number_of_nodes_ever_queued":387,"annotation":"Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)","index":322,"exitcode":0,"outputfile":"Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll","stdout":"Assets/Scripts/PlatformerPlayerController.cs(77,37): warning CS0414: The field 'PlatformerPlayerController.jumpState' is assigned but its value is never used"}
+{"msg":"newNode","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll","index":386}
+{"msg":"runNodeAction","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll","displayName":"Copying Assembly-CSharp.dll","index":386}
+{"msg":"newNode","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb","index":387}
+{"msg":"runNodeAction","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb","displayName":"Copying Assembly-CSharp.pdb","index":387}
+{"msg":"noderesult","processed_node_count":384,"number_of_nodes_ever_queued":387,"annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll","index":386,"exitcode":0,"outputfile":"Library/ScriptAssemblies/Assembly-CSharp.dll"}
+{"msg":"noderesult","processed_node_count":385,"number_of_nodes_ever_queued":387,"annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb","index":387,"exitcode":0,"outputfile":"Library/ScriptAssemblies/Assembly-CSharp.pdb"}
+{"msg":"newNode","annotation":"ScriptAssemblies","index":6}
+{"msg":"runNodeAction","annotation":"ScriptAssemblies","index":6}
