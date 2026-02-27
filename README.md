@@ -1,2 +1,0 @@
-# PrinceOfSurvival
-FPI game project
