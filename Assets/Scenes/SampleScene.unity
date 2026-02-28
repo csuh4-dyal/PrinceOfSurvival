@@ -570,6 +570,7 @@ MonoBehaviour:
   playerBody: {fileID: 1374043643}
   offset: {x: 0, y: 0.6, z: 0}
   mouseSensitivity: 100
+  verticalMultiplier: 1.5
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,7 +1071,7 @@ GameObject:
   - component: {fileID: 2009414375}
   - component: {fileID: 2009414374}
   m_Layer: 5
-  m_Name: cursor
+  m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

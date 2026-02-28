@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
     public Vector3 offset;      // Optional offset for camera position
     public float mouseSensitivity = 100f;
     float xRotation = 0f;
+    public float verticalMultiplier = 1.5f;
 
     void Start()
     {
@@ -24,7 +25,7 @@ public class CameraController : MonoBehaviour
     {
         // Get mouse input
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * verticalMultiplier * Time.deltaTime;
 
         // Calculate vertical rotation and clamp it so you can't flip upside down
         xRotation -= mouseY;
