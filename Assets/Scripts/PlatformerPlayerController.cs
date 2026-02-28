@@ -123,7 +123,16 @@ public class PlatformerPlayerController : MonoBehaviour
         // Get movement input
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        moveInput = new Vector3(h, 0, v).normalized;
+        Vector3 forward = transform.forward;
+        Vector3 right = transform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        moveInput = (forward * v + right * h).normalized;
 
         // Jump input with buffering
         if (Input.GetKeyDown(KeyCode.Space))
