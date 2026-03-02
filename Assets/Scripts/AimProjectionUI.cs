@@ -16,45 +16,38 @@ public class AimProjectionUI : MonoBehaviour
     public float simulationTime = 3f;
     public float timeStep = 0.05f;
 
-    void Update()
+    void Start()
     {
-        cursorUI.position = Input.mousePosition;
-        // Use same ray logic as Racket
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit;
-        Vector3 targetPoint;
-
-        if (Physics.Raycast(ray, out hit, maxDistance))
-            targetPoint = hit.point;
-        else
-            targetPoint = ray.GetPoint(maxDistance);
-
-        Vector3 direction = (targetPoint - throwPoint.position).normalized;
-        Vector3 startVelocity = direction * throwForce;
-
-        // Predict landing
-        Vector3 predictedPoint = PredictLanding(throwPoint.position, startVelocity);
-
-        // Convert to screen position
-        Vector3 screenPos = playerCamera.WorldToScreenPoint(predictedPoint);
-
-        // If behind camera, clamp to edge
-        if (screenPos.z < 0)
-        {
-            screenPos.x = Screen.width - screenPos.x;
-            screenPos.y = Screen.height - screenPos.y;
-        }
-
-        // Clamp INSIDE screen (account for cursor size)
-        float halfW = cursorUI.rect.width * 0.5f;
-        float halfH = cursorUI.rect.height * 0.5f;
-
-        float clampedX = Mathf.Clamp(screenPos.x, halfW, Screen.width - halfW);
-        float clampedY = Mathf.Clamp(screenPos.y, halfH, Screen.height - halfH);
-
-        cursorUI.position = new Vector3(clampedX, clampedY, 0f);
     }
+    void Update()
+{
+    // Always lock UI to screen center
+    cursorUI.position = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+
+    // Ray from CENTER of screen
+    Ray ray = playerCamera.ScreenPointToRay(
+        new Vector3(Screen.width / 2f, Screen.height / 2f)
+    );
+
+    RaycastHit hit;
+    Vector3 targetPoint;
+
+    if (Physics.Raycast(ray, out hit, maxDistance))
+        targetPoint = hit.point;
+    else
+        targetPoint = ray.GetPoint(maxDistance);
+
+    Vector3 direction = (targetPoint - throwPoint.position).normalized;
+    Vector3 startVelocity = direction * throwForce;
+
+    Vector3 predictedPoint = PredictLanding(throwPoint.position, startVelocity);
+
+    // Convert landing point to screen
+    Vector3 screenPos = playerCamera.WorldToScreenPoint(predictedPoint);
+
+    // Optional: if you want landing indicator separate,
+    // use another UI element instead of cursorUI here.
+}
 
     Vector3 PredictLanding(Vector3 startPos, Vector3 startVelocity)
     {
