@@ -3,52 +3,60 @@ using UnityEngine.UI;
 
 public class AimProjectionUI : MonoBehaviour
 {
+    [Header("References")]
     public Camera playerCamera;
     public Transform throwPoint;
     public RectTransform cursorUI;
 
+    [Header("Throw Settings (MATCH RACKET)")]
     public float throwForce = 20f;
     public float maxDistance = 100f;
+
+    [Header("Prediction")]
     public float simulationTime = 3f;
     public float timeStep = 0.05f;
 
     void Update()
     {
-        // Ray from screen center (since cursor is locked)
-        Vector2 center = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = playerCamera.ScreenPointToRay(center);
+        cursorUI.position = Input.mousePosition;
+        // Use same ray logic as Racket
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
         Vector3 targetPoint;
 
-        // Always get a target point
         if (Physics.Raycast(ray, out hit, maxDistance))
             targetPoint = hit.point;
         else
             targetPoint = ray.GetPoint(maxDistance);
 
-        // Calculate throw direction
         Vector3 direction = (targetPoint - throwPoint.position).normalized;
-        Vector3 velocity = direction * throwForce;
+        Vector3 startVelocity = direction * throwForce;
 
-        // Simulate projectile landing
-        Vector3 predictedPoint = SimulateProjectile(throwPoint.position, velocity);
+        // Predict landing
+        Vector3 predictedPoint = PredictLanding(throwPoint.position, startVelocity);
 
-        // Convert world position to screen position
+        // Convert to screen position
         Vector3 screenPos = playerCamera.WorldToScreenPoint(predictedPoint);
 
-        // If behind camera, flip
+        // If behind camera, clamp to edge
         if (screenPos.z < 0)
-            screenPos *= -1f;
+        {
+            screenPos.x = Screen.width - screenPos.x;
+            screenPos.y = Screen.height - screenPos.y;
+        }
 
-        // Clamp to screen
-        float clampedX = Mathf.Clamp(screenPos.x, 0f, Screen.width);
-        float clampedY = Mathf.Clamp(screenPos.y, 0f, Screen.height);
+        // Clamp INSIDE screen (account for cursor size)
+        float halfW = cursorUI.rect.width * 0.5f;
+        float halfH = cursorUI.rect.height * 0.5f;
+
+        float clampedX = Mathf.Clamp(screenPos.x, halfW, Screen.width - halfW);
+        float clampedY = Mathf.Clamp(screenPos.y, halfH, Screen.height - halfH);
 
         cursorUI.position = new Vector3(clampedX, clampedY, 0f);
     }
 
-    Vector3 SimulateProjectile(Vector3 startPos, Vector3 startVelocity)
+    Vector3 PredictLanding(Vector3 startPos, Vector3 startVelocity)
     {
         Vector3 position = startPos;
         Vector3 velocity = startVelocity;
@@ -58,11 +66,11 @@ public class AimProjectionUI : MonoBehaviour
             velocity += Physics.gravity * timeStep;
             position += velocity * timeStep;
 
-            // Stop if we hit something
             if (Physics.Raycast(position, Vector3.down, 0.1f))
                 return position;
         }
 
         return position;
     }
+    
 }
