@@ -4,9 +4,10 @@ public class CameraController : MonoBehaviour
 {
     public Transform playerBody; // Reference to the Player's Transform
     public Vector3 offset;      // Optional offset for camera position
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity = 150f;
     float xRotation = 0f;
-    public float verticalMultiplier = 1.5f;
+    public float verticalMultiplier = 2f;
+    public float horizontalMultiplier = 2f;
 
     void Start()
     {
@@ -24,7 +25,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // Get mouse input
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * horizontalMultiplier *Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * verticalMultiplier * Time.deltaTime;
 
         // Calculate vertical rotation and clamp it so you can't flip upside down
