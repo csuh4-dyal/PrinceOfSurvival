@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - GroundLayer
+  - Rock
+  - Coconut
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Item
   - 
   - 
   - 
