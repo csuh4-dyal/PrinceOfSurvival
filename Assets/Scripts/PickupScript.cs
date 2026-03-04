@@ -46,7 +46,7 @@ public class PickupScript : MonoBehaviour
         
         if (Physics.Raycast(rayCast, out hit, pickupDistance))
         {
-            if (hit.collider.CompareTag("item"))
+            if (hit.collider.CompareTag("Item"))
             {
                 canPickupObject = true;
                 ObjectIwantToPickUp = hit.collider.gameObject;
@@ -83,7 +83,7 @@ public class PickupScript : MonoBehaviour
     }
         private void OnTriggerEnter(Collider other) // to see when the player enters the collider
     {
-        if(other.gameObject.tag == "item") //on the object you want to pick up set the tag to be anything, in this case "object"
+        if(other.gameObject.tag == "Item") //on the object you want to pick up set the tag to be anything, in this case "object"
         {
             canPickupObject = true;  //set the pick up bool to true
             ObjectIwantToPickUp = other.gameObject; //set the gameobject you collided with to one you can reference
@@ -91,7 +91,7 @@ public class PickupScript : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("item"))
+        if (other.CompareTag("Item"))
         {
             canPickupObject = false; //when you leave the collider set the canpickup bool to false
         }
