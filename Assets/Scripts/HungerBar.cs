@@ -8,6 +8,7 @@ public class HungerBar : MonoBehaviour
     public float maxHunger = 100f;
     private float currentHunger;
     public float hungerDepletionRate = .5f; // how fast hunger depletes
+    public static event Action OnPlayerStarved;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,14 +21,14 @@ public class HungerBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHunger > 0)
+            if (currentHunger > 0)
         {
-            DrainHungerBar(hungerDepletionRate*Time.deltaTime);
-
+            DrainHungerBar(hungerDepletionRate * Time.deltaTime);
         }
         else
         {
-            Debug.Log("Player died!");
+            OnPlayerStarved?.Invoke();
+            enabled = false; // stop updating after death
         }
     }
     public void DrainHungerBar(float drainBar) // - to hunger bar
