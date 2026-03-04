@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public class PickupScript : MonoBehaviour
 {
+    public Camera playerCam; // main player camera
     public GameObject myHands; //refer to the hands, where the rock is going
-    bool canPickupObject; //true = can pick up, false = can't pick up
-    GameObject ObjectIwantToPickUp; // the game object you want to pick up
-    bool hasItem; // checks if you have item
+    public float pickupDistance = 3f; // distance to reach
+    private bool canPickupObject; //true = can pick up, false = can't pick up
+    private GameObject ObjectIwantToPickUp; // the game object you want to pick up
+    private bool hasItem; // checks if you have item
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,25 +20,69 @@ public class PickupScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canPickupObject == true)
+        CheckforItem();
+        if(canPickupObject && !hasItem)
         {
-            if (Input.GetKeyDown("e"))  
+            if (Input.GetKeyDown(KeyCode.E))  
             {
-                ObjectIwantToPickUp.GetComponent<Rigidbody>().isKinematic = true;   //makes the rigidbody not be acted upon by forces
-                ObjectIwantToPickUp.transform.position = myHands.transform.position; // sets the position of the object to your hand position
-                ObjectIwantToPickUp.transform.parent = myHands.transform; //makes the object become a child of the parent so that it moves with the hands
+                GrabObject();
+                Debug.Log ("E Pressed");
             }
         }
-        if (Input.GetButtonDown("q") && hasItem == true) // if you have an item and get the key to remove the object, again can be any key
+        if (hasItem == true) // if you have an item and get the key to remove the object, again can be any key
         {
-            ObjectIwantToPickUp.GetComponent<Rigidbody>().isKinematic = false; // make the rigidbody work again
-            ObjectIwantToPickUp.transform.parent = null; // make the object no be a child of the hands
-        }   
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                DropObject();
+                Debug.Log ("Q Pressed");
+            }
+        } 
       
+    }
+    void CheckforItem()
+    {
+        Ray rayCast = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+        
+        if (Physics.Raycast(rayCast, out hit, pickupDistance))
+        {
+            if (hit.collider.CompareTag("item"))
+            {
+                canPickupObject = true;
+                ObjectIwantToPickUp = hit.collider.gameObject;
+            }
+            else
+            {
+                canPickupObject = false;
+            }
+        }
+        else
+        {
+            canPickupObject = false;
+        }
+    }
+    void GrabObject()
+    {
+        hasItem = true;
+        Rigidbody rb = ObjectIwantToPickUp.GetComponent<Rigidbody>();
+        
+        rb.isKinematic = true; 
+        // Snap to hands perfectly
+        ObjectIwantToPickUp.transform.SetParent(myHands.transform); 
+        ObjectIwantToPickUp.transform.localPosition = Vector3.zero;
+        ObjectIwantToPickUp.transform.localRotation = Quaternion.identity;
+    }
+    void DropObject()
+    {
+        hasItem = false;
+        Rigidbody rb = ObjectIwantToPickUp.GetComponent<Rigidbody>();
+        
+        rb.isKinematic = false;
+        ObjectIwantToPickUp.transform.SetParent(null);
     }
         private void OnTriggerEnter(Collider other) // to see when the player enters the collider
     {
-        if(other.gameObject.tag == "object") //on the object you want to pick up set the tag to be anything, in this case "object"
+        if(other.gameObject.tag == "item") //on the object you want to pick up set the tag to be anything, in this case "object"
         {
             canPickupObject = true;  //set the pick up bool to true
             ObjectIwantToPickUp = other.gameObject; //set the gameobject you collided with to one you can reference
@@ -44,8 +90,11 @@ public class PickupScript : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        canPickupObject = false; //when you leave the collider set the canpickup bool to false
-     
+        if (other.CompareTag("item"))
+        {
+            canPickupObject = false; //when you leave the collider set the canpickup bool to false
+        }
+       
     }
 
 }

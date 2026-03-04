@@ -22,7 +22,7 @@ public class AimProjectionUI : MonoBehaviour
     void Update()
 {
     // Always lock UI to screen center
-    cursorUI.position = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+    //cursorUI.position = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
 
     // Ray from CENTER of screen
     Ray ray = playerCamera.ScreenPointToRay(
