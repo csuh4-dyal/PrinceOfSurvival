@@ -6,7 +6,7 @@ public class PickupScript : MonoBehaviour
 {
     public Camera playerCam; // main player camera
     public GameObject myHands; //refer to the hands, where the rock is going
-    public float pickupDistance = 3f; // distance to reach
+    public float pickupDistance = 5f; // distance to reach
     private bool canPickupObject; //true = can pick up, false = can't pick up
     private GameObject ObjectIwantToPickUp; // the game object you want to pick up
     private bool hasItem; // checks if you have item
