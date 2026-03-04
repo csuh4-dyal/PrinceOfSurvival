@@ -50,6 +50,7 @@ public class PickupScript : MonoBehaviour
             {
                 canPickupObject = true;
                 ObjectIwantToPickUp = hit.collider.gameObject;
+                Destroy(ObjectIwantToPickUp);
             }
             else
             {
