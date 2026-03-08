@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8679581755339658147, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: m_Speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2734112821686750367, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.35185
@@ -572,7 +576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraControllerScript
   playerBody: {fileID: 1374043643}
   offset: {x: 0, y: 0.6, z: 0}
-  mouseSensitivity: 100
+  mouseSensitivity: 300
   verticalMultiplier: 1.5
   horizontalMultiplier: 2
 --- !u!114 &963194230
@@ -604,7 +608,7 @@ GameObject:
   - component: {fileID: 1072388054}
   - component: {fileID: 1072388053}
   - component: {fileID: 1072388052}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IslandBlockSand
   m_TagString: GroundLayer
   m_Icon: {fileID: 0}
@@ -1058,7 +1062,7 @@ GameObject:
   - component: {fileID: 1716634504}
   - component: {fileID: 1716634503}
   - component: {fileID: 1716634507}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IslandBlockGrass
   m_TagString: GroundLayer
   m_Icon: {fileID: 0}
@@ -1235,13 +1239,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeedSpawner
   seedPrefab: {fileID: 4813013983652872740, guid: 1b04573102da3e943b96183cc881e439, type: 3}
-  islandSize: {x: 100, y: 100}
-  islandCenter: {x: 0, y: 0, z: 0}
-  spawnInterval: 30
+  islandWidth: 100
+  islandLength: 100
+  spawnHeight: 10
+  spawnInterval: 2
   maxSeedsPerSpawn: 7
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &2009414372
 GameObject:
   m_ObjectHideFlags: 0

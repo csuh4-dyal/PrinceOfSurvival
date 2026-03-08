@@ -6,16 +6,16 @@ public class SeedSpawner : MonoBehaviour
     [Header("Seed")]
     public GameObject seedPrefab;
 
-    [Header("Island Spawn Area")]
-    public Vector2 islandSize = new Vector2(200f, 200f);
-    public Vector3 islandCenter = Vector3.zero;
+    [Header("Island Area")]
+    public float islandWidth = 200f;
+    public float islandLength = 200f;
+
+    [Header("Spawn Height")]
+    public float spawnHeight = 50f;
 
     [Header("Spawn Settings")]
     public float spawnInterval = 30f;
     public int maxSeedsPerSpawn = 7;
-
-    [Header("Ground Detection")]
-    public LayerMask groundLayer;
 
     void Start()
     {
@@ -39,24 +39,11 @@ public class SeedSpawner : MonoBehaviour
 
     void SpawnSeed()
     {
-        for (int attempt = 0; attempt < 10; attempt++)
-        {
-            float randomX = Random.Range(-islandSize.x / 2, islandSize.x / 2);
-            float randomZ = Random.Range(-islandSize.y / 2, islandSize.y / 2);
+        float randomX = Random.Range(-islandWidth / 2f, islandWidth / 2f);
+        float randomZ = Random.Range(-islandLength / 2f, islandLength / 2f);
 
-            Vector3 spawnPos = new Vector3(
-                islandCenter.x + randomX,
-                islandCenter.y + 50f,
-                islandCenter.z + randomZ
-            );
+        Vector3 spawnPosition = new Vector3(randomX, spawnHeight, randomZ);
 
-            RaycastHit hit;
-
-            if (Physics.Raycast(spawnPos, Vector3.down, out hit, 100f, groundLayer))
-            {
-                Instantiate(seedPrefab, hit.point, Quaternion.identity);
-                return;
-            }
-        }
+        Instantiate(seedPrefab, spawnPosition, Quaternion.identity);
     }
 }
