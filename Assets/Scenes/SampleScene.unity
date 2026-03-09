@@ -593,6 +593,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Racket
   playerCamera: {fileID: 963194227}
   holdPoint: {fileID: 0}
+  targetTags:
+  - Food
+  - Rock
+  - Seed
   pickupDistance: 3
   throwForce: 20
   maxDistance: 100
@@ -901,6 +905,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Racket
   playerCamera: {fileID: 963194227}
   holdPoint: {fileID: 1641053157}
+  targetTags:
+  - Food
+  - Rock
+  - Seed
   pickupDistance: 3
   throwForce: 20
   maxDistance: 100
@@ -975,7 +983,7 @@ Transform:
   m_GameObject: {fileID: 1641053156}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0.8}
+  m_LocalPosition: {x: -0.6, y: -0.4, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1239,9 +1247,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeedSpawner
   seedPrefab: {fileID: 4813013983652872740, guid: 1b04573102da3e943b96183cc881e439, type: 3}
-  islandWidth: 100
-  islandLength: 100
-  spawnHeight: 10
+  islandWidth: 50
+  islandLength: 50
+  spawnHeight: 6
   spawnInterval: 2
   maxSeedsPerSpawn: 7
 --- !u!1 &2009414372

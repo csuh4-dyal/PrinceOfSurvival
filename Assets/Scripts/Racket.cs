@@ -47,7 +47,7 @@ public class Racket : MonoBehaviour
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        float sphereRadius = 0.5f; // adjust for small seeds
+        float sphereRadius = 1f; // adjust for small seeds
 
         if (Physics.SphereCast(ray, sphereRadius, out hit, pickupDistance))
         {
