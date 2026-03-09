@@ -200,9 +200,20 @@ public class DuckAI : MonoBehaviour
     {
         state = DuckState.Tamed;
 
+        // Activate the icon in world space
         if (tamedIcon != null)
+        {
             tamedIcon.SetActive(true);
+        }
 
-        Debug.Log(gameObject.name + " is now TAMED and will follow the player");
+        Debug.Log($"{name} has been tamed!");
+    }
+    void LateUpdate()
+    {
+        if (tamedIcon != null && tamedIcon.activeSelf)
+        {
+            tamedIcon.transform.LookAt(Camera.main.transform);
+            tamedIcon.transform.Rotate(0, 180f, 0); // Flip because LookAt faces backwards
+        }
     }
 }
