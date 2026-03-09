@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DuckAI
   player: {fileID: 0}
-  tamedIcon: {fileID: 0}
+  tamedIcon: {fileID: 2340817017346953366}
   followDistance: 3
   wanderRadius: 4
   seedSearchRadius: 5
