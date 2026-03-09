@@ -7,6 +7,9 @@ public class DuckAI : MonoBehaviour
     public Transform player;
     private NavMeshAgent agent;
 
+    [Header("UI")]
+    public GameObject tamedIcon;
+
     [Header("Movement")]
     public float followDistance = 3f;
     public float wanderRadius = 4f;
@@ -80,11 +83,14 @@ public class DuckAI : MonoBehaviour
 
         if (dist > followDistance)
         {
-            agent.SetDestination(player.position);
+            Vector3 dir = (transform.position - player.position).normalized;
+            Vector3 targetPos = player.position + dir * followDistance;
+
+            agent.SetDestination(targetPos);
         }
-        else if (!agent.hasPath)
+        else
         {
-            state = DuckState.Wander;
+            agent.ResetPath();
         }
     }
 
@@ -188,10 +194,12 @@ public class DuckAI : MonoBehaviour
             state = DuckState.FollowPlayer;
         }
     }
-
     void TameDuck()
     {
         state = DuckState.Tamed;
+
+        if (tamedIcon != null)
+            tamedIcon.SetActive(true);
 
         Debug.Log("Duck has been tamed!");
     }
