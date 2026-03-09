@@ -12,31 +12,24 @@ public class DuckAI : MonoBehaviour
 
     [Header("Movement")]
     public float followDistance = 3f;
-    public float wanderRadius = 4f;
-
-    [Header("Idle Detection")]
-    public float idleTimeRequired = 3f;
+    public float wanderRadius = 8f;
 
     [Header("Seed Detection")]
     public float seedSearchRadius = 10f;
 
     [Header("Taming")]
-    public int minSeedsToTame = 3;
-    public int maxSeedsToTame = 7;
+    public int minSeedsToTame = 2;
+    public int maxSeedsToTame = 5;
 
     private int seedsRequired;
     private int seedsFed = 0;
-
-    private float idleTimer = 0f;
-    private Vector3 lastPlayerPos;
 
     private GameObject targetSeed;
 
     private enum DuckState
     {
-        FollowPlayer,
-        Wander,
-        CollectSeed,
+        Wild,
+        EatSeed,
         Tamed
     }
 
@@ -45,35 +38,79 @@ public class DuckAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        seedsRequired = Random.Range(2, 5 + 1);
 
-        seedsRequired = Random.Range(minSeedsToTame, maxSeedsToTame + 1);
+        state = DuckState.Wild;
 
-        lastPlayerPos = player.position;
+        if (tamedIcon != null)
+            tamedIcon.SetActive(false);
 
-        state = DuckState.FollowPlayer;
+        InvokeRepeating(nameof(SearchForSeed), 2f, 2f);
     }
 
     void Update()
     {
-        DetectPlayerIdle();
-
         switch (state)
         {
-            case DuckState.FollowPlayer:
-                FollowPlayer();
+            case DuckState.Wild:
+                Wander();
                 break;
 
-            case DuckState.Wander:
-                WanderNearPlayer();
-                break;
-
-            case DuckState.CollectSeed:
+            case DuckState.EatSeed:
                 MoveToSeed();
                 break;
 
             case DuckState.Tamed:
                 FollowPlayer();
                 break;
+        }
+    }
+
+    void Wander()
+    {
+        if (!agent.hasPath)
+        {
+            Vector3 randomPoint = Random.insideUnitSphere * wanderRadius + transform.position;
+
+            NavMeshHit hit;
+
+            if (NavMesh.SamplePosition(randomPoint, out hit, wanderRadius, NavMesh.AllAreas))
+            {
+                agent.SetDestination(hit.position);
+            }
+        }
+    }
+
+    void SearchForSeed()
+    {
+        if (state == DuckState.Tamed)
+            return;
+
+        GameObject seed = FindClosestSeed();
+
+        if (seed != null)
+        {
+            targetSeed = seed;
+            state = DuckState.EatSeed;
+        }
+    }
+
+    void MoveToSeed()
+    {
+        if (targetSeed == null)
+        {
+            state = DuckState.Wild;
+            return;
+        }
+
+        agent.SetDestination(targetSeed.transform.position);
+
+        float dist = Vector3.Distance(transform.position, targetSeed.transform.position);
+
+        if (dist < 1.5f)
+        {
+            Destroy(targetSeed); // Duck eats the seed
+            state = DuckState.Wild;
         }
     }
 
@@ -91,67 +128,6 @@ public class DuckAI : MonoBehaviour
         else
         {
             agent.ResetPath();
-        }
-    }
-
-    void WanderNearPlayer()
-    {
-        if (!agent.hasPath)
-        {
-            Vector3 randomPoint = Random.insideUnitSphere * wanderRadius;
-            randomPoint += player.position;
-
-            NavMeshHit hit;
-
-            if (NavMesh.SamplePosition(randomPoint, out hit, wanderRadius, NavMesh.AllAreas))
-            {
-                agent.SetDestination(hit.position);
-            }
-        }
-    }
-
-    void DetectPlayerIdle()
-    {
-        float movement = Vector3.Distance(player.position, lastPlayerPos);
-
-        if (movement < 0.1f)
-        {
-            idleTimer += Time.deltaTime;
-        }
-        else
-        {
-            idleTimer = 0;
-        }
-
-        if (idleTimer > idleTimeRequired)
-        {
-            GameObject seed = FindClosestSeed();
-
-            if (seed != null)
-            {
-                targetSeed = seed;
-                state = DuckState.CollectSeed;
-            }
-        }
-
-        lastPlayerPos = player.position;
-    }
-
-    void MoveToSeed()
-    {
-        if (targetSeed == null)
-        {
-            state = DuckState.FollowPlayer;
-            return;
-        }
-
-        agent.SetDestination(targetSeed.transform.position);
-
-        float dist = Vector3.Distance(transform.position, targetSeed.transform.position);
-
-        if (dist < 1.5f)
-        {
-            EatSeed(targetSeed);
         }
     }
 
@@ -179,36 +155,54 @@ public class DuckAI : MonoBehaviour
         return closestSeed;
     }
 
-    void EatSeed(GameObject seed)
+    // Call this externally when the player tames the duck
+    void OnTriggerEnter(Collider other)
     {
-        Destroy(seed);
+        if (state == DuckState.Tamed)
+            return;
 
-        seedsFed++;
+        if (other.CompareTag("Seed"))
+        {
+            Seed seed = other.GetComponent<Seed>();
 
-        if (seedsFed >= seedsRequired)
-        {
-            TameDuck();
-        }
-        else
-        {
-            state = DuckState.FollowPlayer;
+            if (seed != null && seed.thrownByPlayer)
+            {
+                Rigidbody rb = other.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector3.zero;
+                    rb.isKinematic = true;
+                }
+
+                Destroy(other.gameObject);
+
+                seedsFed++;
+
+                int seedsLeft = seedsRequired - seedsFed;
+
+                Debug.Log(
+                    gameObject.name +
+                    " consumed a player-thrown seed. (" +
+                    seedsFed + "/" + seedsRequired +
+                    "). Seeds left to tame: " +
+                    Mathf.Max(seedsLeft, 0)
+                );
+
+                if (seedsFed >= seedsRequired)
+                {
+                    TameDuck();
+                }
+            }
         }
     }
-    void TameDuck()
+    public void TameDuck()
     {
         state = DuckState.Tamed;
 
         if (tamedIcon != null)
             tamedIcon.SetActive(true);
 
-        Debug.Log("Duck has been tamed!");
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Seed"))
-        {
-            EatSeed(other.gameObject);
-        }
+        Debug.Log(gameObject.name + " is now TAMED and will follow the player");
     }
 }

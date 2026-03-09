@@ -109,6 +109,12 @@ public class Racket : MonoBehaviour
         heldRb.isKinematic = false;
         heldRb.linearVelocity = direction * throwForce;
 
+        Seed seedScript = heldObject.GetComponent<Seed>();
+        if (seedScript != null)
+        {
+            seedScript.thrownByPlayer = true;
+        }
+
         Debug.Log("Threw object: " + heldObject.name + " towards " + targetPoint);
 
         heldObject = null;
