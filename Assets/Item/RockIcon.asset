@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a461553756541f7aaee979e05fe6c5, type: 3}
   m_Name: RockIcon
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  ItemName: 
+  ItemName: Rock
   icon: {fileID: 0}
-  maxStackSize: 0
-  itemPrefab: {fileID: 0}
-  handItemPrefab: {fileID: 0}
+  maxStackSize: 25
+  itemPrefab: {fileID: 6670977643623406392, guid: eaf9e2088cfb04f5b9b4f6aa27255030, type: 3}
+  handItemPrefab: {fileID: 6670977643623406392, guid: eaf9e2088cfb04f5b9b4f6aa27255030, type: 3}

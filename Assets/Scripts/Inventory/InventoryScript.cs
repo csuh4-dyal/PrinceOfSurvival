@@ -36,10 +36,12 @@ public class InventoryScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             container.SetActive(container.activeInHierarchy);
-            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
-            Cursor.visible = !Cursor.visible;
-
+            UnityEngine.Cursor.lockState = UnityEngine.Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+            UnityEngine.Cursor.visible = !UnityEngine.Cursor.visible;
+            
         }
+        DetectLookedAtItem();
+        Pickup();
 
     }
     public void AddItem(ItemSO itemToAdd, int amount)

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a461553756541f7aaee979e05fe6c5, type: 3}
   m_Name: CoconutIcon
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  ItemName: 
+  ItemName: Coconut
   icon: {fileID: 0}
-  maxStackSize: 0
-  itemPrefab: {fileID: 0}
-  handItemPrefab: {fileID: 0}
+  maxStackSize: 10
+  itemPrefab: {fileID: 8902986046195402595, guid: 4426e421ac0bb471eb26d3c6fd3af8af, type: 3}
+  handItemPrefab: {fileID: 8902986046195402595, guid: 4426e421ac0bb471eb26d3c6fd3af8af, type: 3}

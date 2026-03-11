@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController instance;
     public Transform playerBody; // Reference to the Player's Transform
     public Vector3 offset;      // Optional offset for camera position
     public float mouseSensitivity = 150f;
@@ -9,6 +10,11 @@ public class CameraController : MonoBehaviour
     public float verticalMultiplier = 2f;
     public float horizontalMultiplier = 2f;
 
+    public bool updatingRotation;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         // Lock cursor to the center of the screen and hide it
@@ -24,6 +30,7 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
+        if (!updatingRotation) return;
         // Get mouse input
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * horizontalMultiplier *Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * verticalMultiplier * Time.deltaTime;
