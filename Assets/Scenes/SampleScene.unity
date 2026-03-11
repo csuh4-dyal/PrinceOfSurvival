@@ -1906,7 +1906,7 @@ MonoBehaviour:
   islandWidth: 50
   islandLength: 50
   spawnHeight: 6
-  spawnInterval: 5
+  spawnInterval: 30
   maxSeedsPerSpawn: 7
 --- !u!1 &1889290434
 GameObject:
