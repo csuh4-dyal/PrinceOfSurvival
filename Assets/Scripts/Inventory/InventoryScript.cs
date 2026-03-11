@@ -18,6 +18,10 @@ public class InventoryScript : MonoBehaviour
     private Material originalMaterial;
     private Renderer lookedAtRenderer = null;
 
+    private int equipptedHotBarIndex = 0; //0-3
+    public float equippedOpacity = 0.9f;
+    public float normalOpacity = 0.58f;
+
     private List<Slot> hotbarSlots = new List<Slot>();
     private List<Slot> allSlots = new List<Slot>();
 
@@ -121,5 +125,47 @@ public class InventoryScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UpdateHotbarOpacity()
+    {
+        for(int i = 0; i < hotbarSlots.Count; i++)
+        {
+            Image icon = hotbarSlots[i].GetComponent<Image>();
+            if(icon != null)
+            {
+                icon.tintColor = (i == equipptedHotBarIndex) ? new Color(1, 1, 1, equipptedHotBarIndex) : new Color(1, 1, 1, normalOpacity);
+
+            }
+        }
+    }
+    private void HandleHotBarSelection()
+    {
+        for (int i = 0; i<6; i++)
+        {
+            if (Input.GetKeyDown((i + 1).ToString()))
+            {
+                equipptedHotBarIndex = i;
+                UpdateHotbarOpacity();
+
+            }
+        }
+    }
+    private void HandleDropEquippedItem()
+    {
+        if (!Input.GetKeyDown(KeyCode.Q)) return;
+
+        Slot equippedSlot = hotbarSlots[equipptedHotBarIndex];
+
+        if (!equippedSlot.HasItem()) return;
+
+        ItemSO itemSO = equippedSlot.GetItem();
+        GameObject prefab = itemSO.itemPrefab;
+
+        if (prefab == null) return;
+
+        GameObject dropped = Instantiate(prefab, Camera.main.transform.position + Camera.main.transform.forward, Quaternion.identity);
+
+
     }
 }
