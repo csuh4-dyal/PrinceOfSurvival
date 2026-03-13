@@ -672,6 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 879592104}
+  - component: {fileID: 879592105}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -699,6 +700,27 @@ RectTransform:
   m_AnchoredPosition: {x: -725, y: 425}
   m_SizeDelta: {x: -1550, y: -950}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &879592105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879592103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6010e24c0a2ed4e008c922fd29cd6e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryScript
+  rockItem: {fileID: 11400000, guid: 2e77b7721712b084e9eee0f6bcb46924, type: 2}
+  seedItem: {fileID: 11400000, guid: a86f8684549d60c459b8aa2d9d140a87, type: 2}
+  coconutItem: {fileID: 11400000, guid: 8190816ab80482d44bf25b2e9945ea3c, type: 2}
+  hotbarObj: {fileID: 2064598877}
+  container: {fileID: 1239609537}
+  pickupRange: 3
+  highlightMaterial: {fileID: 0}
+  equippedOpacity: 0.9
+  normalOpacity: 0.58
 --- !u!1 &935523932
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +918,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -934,6 +956,7 @@ MonoBehaviour:
   mouseSensitivity: 100
   verticalMultiplier: 1.5
   horizontalMultiplier: 2
+  updatingRotation: 1
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,8 +970,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Racket
   playerCamera: {fileID: 963194227}
-  throwPoint: {fileID: 873144632}
-  throwablePrefab: {fileID: 6670977643623406392, guid: eaf9e2088cfb04f5b9b4f6aa27255030, type: 3}
+  holdPoint: {fileID: 0}
+  targetTags:
+  - Food
+  - Rock
+  - Seed
+  pickupDistance: 3
   throwForce: 20
   maxDistance: 100
 --- !u!114 &963194231

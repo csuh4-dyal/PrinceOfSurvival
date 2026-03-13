@@ -35,7 +35,7 @@ public class InventoryScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            //AddItem();
+            AddItem(seedItem,1);
         }
         if(Input.GetKeyDown(KeyCode.Tab))
         {
@@ -46,6 +46,10 @@ public class InventoryScript : MonoBehaviour
         }
         DetectLookedAtItem();
         Pickup();
+
+        HandleHotBarSelection();
+        HandleDropEquippedItem();
+        UpdateHotbarOpacity();
 
     }
     public void AddItem(ItemSO itemToAdd, int amount)
@@ -165,6 +169,12 @@ public class InventoryScript : MonoBehaviour
         if (prefab == null) return;
 
         GameObject dropped = Instantiate(prefab, Camera.main.transform.position + Camera.main.transform.forward, Quaternion.identity);
+
+        Item item = dropped.GetComponent<Item>();
+        item.item = itemSO;
+        item.amount =equippedSlot.GetAmt();
+
+        equippedSlot.ClearSlot();
 
 
     }

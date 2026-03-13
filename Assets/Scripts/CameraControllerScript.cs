@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     public float verticalMultiplier = 2f;
     public float horizontalMultiplier = 2f;
 
-    public bool updatingRotation;
+    public bool updatingRotation = true;
     private void Awake()
     {
         instance = this;
