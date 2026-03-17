@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SeedIcon
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   ItemName: Seed
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1b968003054119b458b1c82d61aeb416, type: 3}
   maxStackSize: 25
   itemPrefab: {fileID: 4813013983652872740, guid: 1b04573102da3e943b96183cc881e439, type: 3}
   handItemPrefab: {fileID: 4813013983652872740, guid: 1b04573102da3e943b96183cc881e439, type: 3}

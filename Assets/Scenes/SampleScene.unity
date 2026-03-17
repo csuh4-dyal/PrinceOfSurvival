@@ -967,7 +967,7 @@ MonoBehaviour:
   mouseSensitivity: 300
   verticalMultiplier: 1.5
   horizontalMultiplier: 2
-  updatingRotation: 0
+  updatingRotation: 1
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,7 +981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Racket
   playerCamera: {fileID: 963194227}
-  holdPoint: {fileID: 0}
+  holdPoint: {fileID: 1641053157}
   targetTags:
   - Food
   - Rock
@@ -1205,6 +1205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1355911724}
+  - component: {fileID: 1355911725}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -1232,6 +1233,27 @@ RectTransform:
   m_AnchoredPosition: {x: -725, y: 425}
   m_SizeDelta: {x: -1550, y: -950}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1355911725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355911723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6010e24c0a2ed4e008c922fd29cd6e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryScript
+  rockItem: {fileID: 11400000, guid: 2e77b7721712b084e9eee0f6bcb46924, type: 2}
+  seedItem: {fileID: 11400000, guid: a86f8684549d60c459b8aa2d9d140a87, type: 2}
+  coconutItem: {fileID: 11400000, guid: 8190816ab80482d44bf25b2e9945ea3c, type: 2}
+  hotbarObj: {fileID: 1274183711}
+  container: {fileID: 724809689}
+  pickupRange: 3
+  highlightMaterial: {fileID: 2100000, guid: e8ba279bf88f1e542be2609a8488d102, type: 2}
+  equippedOpacity: 0.9
+  normalOpacity: 0.58
 --- !u!1 &1374043639
 GameObject:
   m_ObjectHideFlags: 0
