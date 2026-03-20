@@ -151,11 +151,11 @@ public class PlatformerPlayerController : MonoBehaviour
     {
         // Use SphereCast for reliable ground detection on slopes/edges
         isGrounded = Physics.SphereCast(
-            transform.position + Vector3.up * 0.1f,  // Start slightly above ground
+            transform.position + Vector3.up * 1.0f,  // Start slightly above ground
             0.3f,                                     // Sphere radius
             Vector3.down,                             // Cast direction
             out RaycastHit hit,
-            groundCheckDistance,
+            groundCheckDistance + 0.85f,
             groundLayer
         );
 

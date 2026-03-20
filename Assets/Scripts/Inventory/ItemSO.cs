@@ -1,5 +1,3 @@
-using System.IO.Enumeration;
-using UnityEditor.Build;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "NewItem")]

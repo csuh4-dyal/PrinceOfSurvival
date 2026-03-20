@@ -1,181 +1,188 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
-using System;
-using UnityEngine.UIElements;
 
 public class InventoryScript : MonoBehaviour
 {
+    [Header("Item Definitions")]
     public ItemSO rockItem;
     public ItemSO seedItem;
     public ItemSO coconutItem;
 
+    [Header("UI")]
     public GameObject hotbarObj;
     public GameObject container;
 
+    [Header("Pickup")]
     public float pickupRange = 3f;
-    private Item lookedAtItem = null;
     public Material highlightMaterial;
-    private Material originalMaterial;
-    private Renderer lookedAtRenderer = null;
 
-    private int equipptedHotBarIndex = 0; //0-3
+    [Header("Hotbar Opacity")]
     public float equippedOpacity = 0.9f;
     public float normalOpacity = 0.58f;
 
     private List<Slot> hotbarSlots = new List<Slot>();
     private List<Slot> allSlots = new List<Slot>();
 
-  private void Awake()
-    {
-        hotbarSlots.AddRange(hotbarObj.GetComponentsInChildren<Slot>());    
+    private int equippedHotbarIndex = 0;
 
+    private Renderer lookedAtRenderer;
+    private Material originalMaterial;
+
+    private void Awake()
+    {
+        hotbarSlots.AddRange(hotbarObj.GetComponentsInChildren<Slot>());
         allSlots.AddRange(hotbarSlots);
     }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            AddItem(seedItem,1);
-        }
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            container.SetActive(container.activeInHierarchy);
-            UnityEngine.Cursor.lockState = UnityEngine.Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
-            UnityEngine.Cursor.visible = !UnityEngine.Cursor.visible;
-            
-        }
+        HandleHotbarSelection();
         DetectLookedAtItem();
         Pickup();
-
-        HandleHotBarSelection();
         HandleDropEquippedItem();
         UpdateHotbarOpacity();
-
+        HandleInventoryToggle();
     }
-    public void AddItem(ItemSO itemToAdd, int amount)
+
+    // ── Hotbar ────────────────────────────────────────────────
+
+    private void HandleHotbarSelection()
     {
-        int remaining = amount;
-        foreach (Slot slot in allSlots)
+        for (int i = 0; i < hotbarSlots.Count; i++)
         {
-            if (slot.HasItem() && slot.GetItem() == itemToAdd)
-            {
-                int currentAmount = slot.GetAmt();
-                int maxStack = itemToAdd.maxStackSize;
-
-                if (currentAmount < maxStack)
-                {
-                    int spaceLeft = maxStack - currentAmount;
-                    int amountToAdd = Mathf.Min(spaceLeft, remaining);
-
-                    slot.SetItem(itemToAdd, currentAmount + amountToAdd);
-                    remaining -= amountToAdd;
-
-                    if (remaining <= 0)
-                        return;
-                }
-            }
-        }
-
-        foreach (Slot slot in allSlots)
-        {
-            if (!slot.HasItem())
-            {
-                int amountToPlace = Mathf.Min(itemToAdd.maxStackSize, remaining);
-                slot.SetItem(itemToAdd, amountToPlace);
-
-                if (remaining <= 0)
-                    return;
-
-            }
-        }
-
-        if (remaining > 0)
-        {
-            Debug.Log("Inventory is full, could not add" + remaining + " of " + itemToAdd.ItemName);
+            if (Input.GetKeyDown((i + 1).ToString()))
+                SelectSlot(i);
         }
     }
-        private void Pickup()
+
+    private void SelectSlot(int index)
     {
-        if (lookedAtRenderer != null && Input.GetKeyDown(KeyCode.E))
-        {
-            Item item = lookedAtRenderer.GetComponent<Item>();
-            if (item != null)
-            {
-                AddItem(item.item, item.amount);
-                Destroy(item.gameObject);
-            }
-        }
-    }
-        private void DetectLookedAtItem()
-    {
-        if(lookedAtRenderer != null)
-        {
-            lookedAtRenderer.material = originalMaterial;
-            lookedAtRenderer = null;   
-            originalMaterial = null;    
-        }
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
-        {
-            Item item = hit.collider.GetComponent<Item>();  
-            if (item != null)
-            {
-                Renderer rend = item.GetComponent<Renderer>();
-                if (rend != null)
-                {
-                    originalMaterial = rend.material;
-                    rend.material = highlightMaterial;
-                    lookedAtRenderer = rend;
-                }
-            }
-        }
+        if (index < 0 || index >= hotbarSlots.Count) return;
+
+        equippedHotbarIndex = index;
+        UpdateHotbarOpacity();
+        Debug.Log("Selected Slot: " + index);
     }
 
     private void UpdateHotbarOpacity()
     {
-        for(int i = 0; i < hotbarSlots.Count; i++)
+        for (int i = 0; i < hotbarSlots.Count; i++)
         {
             Image icon = hotbarSlots[i].GetComponent<Image>();
-            if(icon != null)
-            {
-                icon.tintColor = (i == equipptedHotBarIndex) ? new Color(1, 1, 1, equipptedHotBarIndex) : new Color(1, 1, 1, normalOpacity);
-
-            }
+            if (icon != null)
+                icon.color = new Color(1, 1, 1, i == equippedHotbarIndex ? equippedOpacity : normalOpacity);
         }
     }
-    private void HandleHotBarSelection()
+
+    // ── Inventory Toggle ──────────────────────────────────────
+
+    private void HandleInventoryToggle()
     {
-        for (int i = 0; i<6; i++)
-        {
-            if (Input.GetKeyDown((i + 1).ToString()))
-            {
-                equipptedHotBarIndex = i;
-                UpdateHotbarOpacity();
+        if (!Input.GetKeyDown(KeyCode.Tab)) return;
 
-            }
-        }
+        bool isOpen = !container.activeInHierarchy;
+        container.SetActive(isOpen);
+        Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isOpen;
     }
+
+    // ── Pickup ────────────────────────────────────────────────
+
+    private void DetectLookedAtItem()
+    {
+        // Clear previous highlight
+        if (lookedAtRenderer != null)
+        {
+            lookedAtRenderer.material = originalMaterial;
+            lookedAtRenderer = null;
+            originalMaterial = null;
+        }
+
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        if (!Physics.Raycast(ray, out RaycastHit hit, pickupRange)) return;
+
+        Item item = hit.collider.GetComponent<Item>();
+        if (item == null) return;
+
+        Renderer rend = item.GetComponent<Renderer>();
+        if (rend == null) return;
+
+        originalMaterial = rend.material;
+        rend.material = highlightMaterial;
+        lookedAtRenderer = rend;
+    }
+
+    private void Pickup()
+    {
+        if (lookedAtRenderer == null || !Input.GetKeyDown(KeyCode.E)) return;
+
+        Item item = lookedAtRenderer.GetComponent<Item>();
+        if (item == null) return;
+
+        AddItem(item.item, item.amount);
+        Destroy(item.gameObject);
+    }
+
+    // ── Drop ──────────────────────────────────────────────────
+
     private void HandleDropEquippedItem()
     {
         if (!Input.GetKeyDown(KeyCode.Q)) return;
 
-        Slot equippedSlot = hotbarSlots[equipptedHotBarIndex];
+        Slot slot = hotbarSlots[equippedHotbarIndex];
+        if (!slot.HasItem()) return;
 
-        if (!equippedSlot.HasItem()) return;
+        ItemSO itemSO = slot.GetItem();
+        if (itemSO.itemPrefab == null) return;
 
-        ItemSO itemSO = equippedSlot.GetItem();
-        GameObject prefab = itemSO.itemPrefab;
+        Vector3 dropPos = Camera.main.transform.position + Camera.main.transform.forward;
+        GameObject dropped = Instantiate(itemSO.itemPrefab, dropPos, Quaternion.identity);
 
-        if (prefab == null) return;
+        Item droppedItem = dropped.GetComponent<Item>();
+        if (droppedItem != null)
+        {
+            droppedItem.item = itemSO;
+            droppedItem.amount = slot.GetAmt();
+        }
 
-        GameObject dropped = Instantiate(prefab, Camera.main.transform.position + Camera.main.transform.forward, Quaternion.identity);
+        slot.ClearSlot();
+    }
 
-        Item item = dropped.GetComponent<Item>();
-        item.item = itemSO;
-        item.amount =equippedSlot.GetAmt();
+    // ── Add Item ──────────────────────────────────────────────
 
-        equippedSlot.ClearSlot();
+    public void AddItem(ItemSO itemToAdd, int amount)
+    {
+        int remaining = amount;
 
+        // Pass 1: fill existing stacks
+        foreach (Slot slot in allSlots)
+        {
+            if (!slot.HasItem() || slot.GetItem() != itemToAdd) continue;
 
+            int space = itemToAdd.maxStackSize - slot.GetAmt();
+            if (space <= 0) continue;
+
+            int toAdd = Mathf.Min(space, remaining);
+            slot.SetItem(itemToAdd, slot.GetAmt() + toAdd);
+            remaining -= toAdd;
+
+            if (remaining <= 0) return;
+        }
+
+        // Pass 2: fill empty slots
+        foreach (Slot slot in allSlots)
+        {
+            if (slot.HasItem()) continue;
+
+            int toPlace = Mathf.Min(itemToAdd.maxStackSize, remaining);
+            slot.SetItem(itemToAdd, toPlace);
+            remaining -= toPlace;
+
+            if (remaining <= 0) return;
+        }
+
+        if (remaining > 0)
+            Debug.Log($"Inventory full — could not add {remaining} of {itemToAdd.ItemName}");
     }
 }
