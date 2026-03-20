@@ -81614,31 +81614,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6140.0425
+      value: 5217.44
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1664.3064
+      value: 1414.2278
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 6184.766
+      value: 5255.4434
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -88.055
+      value: -102.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.897
+      value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99889493
+      value: 0.9980478
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -81646,7 +81646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.046999604
+      value: -0.062455244
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -81658,7 +81658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -5.388
+      value: 1432.838
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d067702b8766c84daf6e3c729551c2b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -82008,9 +82008,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeedSpawner
   seedPrefab: {fileID: 4813013983652872740, guid: 1b04573102da3e943b96183cc881e439, type: 3}
-  islandWidth: 50
-  islandLength: 50
-  spawnHeight: 6
+  islandWidth: 1000
+  islandLength: 1000
+  spawnHeight: 30
   spawnInterval: 30
   maxSeedsPerSpawn: 7
 --- !u!1 &1889290434
