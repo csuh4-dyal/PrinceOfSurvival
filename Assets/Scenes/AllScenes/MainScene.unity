@@ -379,7 +379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d4f1c7d5e0b8d2c44aefa25bdae69845, type: 3}
       propertyPath: m_TagString
-      value: Environment
+      value: GroundLayer
       objectReference: {fileID: 0}
     - target: {fileID: 2869344807088711131, guid: d4f1c7d5e0b8d2c44aefa25bdae69845, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -81029,9 +81029,9 @@ GameObject:
   - component: {fileID: 802241944}
   - component: {fileID: 802241943}
   - component: {fileID: 802241942}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81140,7 +81140,7 @@ GameObject:
   - component: {fileID: 870838981}
   m_Layer: 0
   m_Name: Island
-  m_TagString: Untagged
+  m_TagString: GroundLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82008,11 +82008,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeedSpawner
   seedPrefab: {fileID: 4813013983652872740, guid: 1b04573102da3e943b96183cc881e439, type: 3}
-  islandWidth: 1000
-  islandLength: 1000
+  islandWidth: 500
+  islandLength: 2000
   spawnHeight: 30
-  spawnInterval: 30
+  spawnInterval: 10
   maxSeedsPerSpawn: 7
+  maxSpawnAttempts: 10
 --- !u!1 &1889290434
 GameObject:
   m_ObjectHideFlags: 0
