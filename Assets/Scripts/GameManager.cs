@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro; // Use TextMeshPro for better UI text
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,17 @@ public class GameManager : MonoBehaviour
     public int ducksRequiredToUnlock = 10;
     public GameObject cavePath; // Path or door to unlock
     private int ducksTamed = 0;
+
+    [Header("UI")]
+    public TMP_Text duckCounterText; // Assign in inspector
+
+    void Start()
+    {
+        UpdateDuckUI();
+
+        if (cavePath != null)
+            cavePath.SetActive(false); // initially locked
+    }
 
     void OnEnable()
     {
@@ -26,15 +38,23 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(loseSceneName);
     }
 
-    // Called by ducks automatically
+    // Called by DuckAI when a duck is tamed
     public void OnDuckTamed()
     {
         ducksTamed++;
+        UpdateDuckUI();
+
         Debug.Log("Ducks tamed: " + ducksTamed + "/" + ducksRequiredToUnlock);
 
         if (ducksTamed >= ducksRequiredToUnlock)
-        {
             UnlockCavePath();
+    }
+
+    void UpdateDuckUI()
+    {
+        if (duckCounterText != null)
+        {
+            duckCounterText.text = ducksTamed + " / " + ducksRequiredToUnlock;
         }
     }
 
