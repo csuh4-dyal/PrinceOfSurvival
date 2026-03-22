@@ -1,17 +1,27 @@
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Scene Settings")]
+    public string sceneToLoad;
+
+    [Header("Image Toggle Settings")]
+    public GameObject imageObject;
+
+    // Function 1: Toggle Image
+    public void ToggleImage()
     {
-        
+        if (imageObject != null)
+        {
+            imageObject.SetActive(!imageObject.activeSelf);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    // Function 2: Load Scene
+    public void LoadScene()
     {
-        
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

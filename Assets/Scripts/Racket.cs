@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class Racket : MonoBehaviour
@@ -6,6 +6,7 @@ public class Racket : MonoBehaviour
     [Header("References")]
     public Camera playerCamera;
     public Transform holdPoint;
+    public Animator animator; // NEW
     public string[] targetTags = { "Food", "Rock", "Seed" };
 
     [Header("Settings")]
@@ -15,6 +16,8 @@ public class Racket : MonoBehaviour
 
     private GameObject heldObject;
     private Rigidbody heldRb;
+
+    private bool isSwinging = false; //prevents spam
 
     void Update()
     {
@@ -30,24 +33,45 @@ public class Racket : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isSwinging)
         {
-            if (heldObject != null)
-            {
-                Throw();
-            }
-            else
-            {
-                Debug.Log("No object held to throw.");
-            }
+            Swing();
         }
+    }
+
+    // Handles animation trigger
+    void Swing()
+    {
+        isSwinging = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Swing");
+        }
+
+        // If holding something → throw it during swing
+        if (heldObject != null)
+        {
+            Throw();
+        }
+        else
+        {
+            Debug.Log("Swinging racket with no object.");
+        }
+
+        Invoke(nameof(ResetSwing), 0.5f); // match animation length
+    }
+
+    void ResetSwing()
+    {
+        isSwinging = false;
     }
 
     void TryPickup()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        float sphereRadius = 1f; // adjust for small seeds
+        float sphereRadius = 1f;
 
         if (Physics.SphereCast(ray, sphereRadius, out hit, pickupDistance))
         {
