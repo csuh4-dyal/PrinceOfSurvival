@@ -13,6 +13,8 @@ public class DuckAI : MonoBehaviour
     [Header("Movement")]
     public float followDistance = 3f;
     public float wanderRadius = 8f;
+    private float wanderTimer = 0f;
+    public float wanderInterval = 3f;
 
     [Header("Seed Detection")]
     public float seedSearchRadius = 10f;
@@ -65,10 +67,11 @@ public class DuckAI : MonoBehaviour
                 break;
         }
     }
-
     void Wander()
     {
-        if (!agent.hasPath)
+        wanderTimer += Time.deltaTime;
+
+        if (wanderTimer >= wanderInterval || !agent.hasPath)
         {
             Vector3 randomPoint = Random.insideUnitSphere * wanderRadius + transform.position;
 
@@ -78,6 +81,8 @@ public class DuckAI : MonoBehaviour
             {
                 agent.SetDestination(hit.position);
             }
+
+            wanderTimer = 0f;
         }
     }
 
