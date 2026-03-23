@@ -80896,6 +80896,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -82140,6 +82148,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -82461,6 +82477,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -82654,6 +82678,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -82988,6 +83020,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83484,6 +83524,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83811,6 +83859,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -84212,6 +84268,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -84430,9 +84494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7433c160772a4539997f9197f2e39c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HungerBar
-  maxHunger: 200
+  maxHunger: 300
   currentHunger: 0
-  hungerDrainRate: 1
+  hungerDrainRate: 0.75
   hungerFillImage: {fileID: 1349725008}
 --- !u!1 &1531987241
 GameObject:
@@ -85030,6 +85094,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -85248,6 +85320,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1406155988}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: maxSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
+      propertyPath: minSeedsToTame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -85331,7 +85411,7 @@ Transform:
   m_GameObject: {fileID: 1883895161}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.6, y: 0, z: 0}
+  m_LocalPosition: {x: -41, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
