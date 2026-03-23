@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI; // For fade panel
 
 public class UltimateDuck : MonoBehaviour
 {
@@ -15,8 +16,15 @@ public class UltimateDuck : MonoBehaviour
     public float spawnRadius = 5f;
 
     [Header("Scene")]
-    public string sceneToLoad = "MainScene";
-    public float delayBeforeSceneLoad = 5f;
+    public string winSceneName = "WinScene";
+
+    [Header("UI")]
+    public Image fadePanel; // Full-screen white Image for fade
+    public float fadeDuration = 2f;
+
+    [Header("Story Dialogue")]
+    [TextArea(2, 5)]
+    public string[] finalStoryLines;
 
     private bool triggered = false;
 
@@ -28,6 +36,12 @@ public class UltimateDuck : MonoBehaviour
             bgmSource.clip = initialBGM;
             bgmSource.loop = true;
             bgmSource.Play();
+        }
+
+        // Make sure fade panel is transparent at start
+        if (fadePanel != null)
+        {
+            fadePanel.color = new Color(1, 1, 1, 0);
         }
     }
 
@@ -58,14 +72,52 @@ public class UltimateDuck : MonoBehaviour
         {
             Vector3 randomPos = player.position + Random.insideUnitSphere * spawnRadius;
             randomPos.y = player.position.y;
-
             Instantiate(duckPrefab, randomPos, Quaternion.identity);
         }
 
-        // Wait before loading next scene
-        yield return new WaitForSeconds(delayBeforeSceneLoad);
+        // Wait a short moment before starting dialogue
+        yield return new WaitForSeconds(1f);
 
-        // Load scene
-        SceneManager.LoadScene(sceneToLoad);
+        // Play final story dialogue and wait until it finishes
+        if (DialogueManager.Instance != null && finalStoryLines.Length > 0)
+        {
+            bool dialogueFinished = false;
+
+            DialogueManager.Instance.StartDialogue(finalStoryLines, () =>
+            {
+                dialogueFinished = true; // Callback sets this true
+            });
+
+            // Wait until dialogue is finished
+            while (!dialogueFinished)
+            {
+                yield return null;
+            }
+        }
+
+        // Fade to white
+        if (fadePanel != null)
+        {
+            yield return StartCoroutine(FadeToWhite());
+        }
+
+        // Load Win Scene
+        SceneManager.LoadScene(winSceneName);
+    }
+
+    IEnumerator FadeToWhite()
+    {
+        float elapsed = 0f;
+        Color startColor = fadePanel.color;
+        Color targetColor = new Color(1, 1, 1, 1);
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            fadePanel.color = Color.Lerp(startColor, targetColor, elapsed / fadeDuration);
+            yield return null;
+        }
+
+        fadePanel.color = targetColor;
     }
 }
