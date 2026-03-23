@@ -76,24 +76,7 @@ public class UltimateDuck : MonoBehaviour
         }
 
         // Wait a short moment before starting dialogue
-        yield return new WaitForSeconds(1f);
-
-        // Play final story dialogue and wait until it finishes
-        if (DialogueManager.Instance != null && finalStoryLines.Length > 0)
-        {
-            bool dialogueFinished = false;
-
-            DialogueManager.Instance.StartDialogue(finalStoryLines, () =>
-            {
-                dialogueFinished = true; // Callback sets this true
-            });
-
-            // Wait until dialogue is finished
-            while (!dialogueFinished)
-            {
-                yield return null;
-            }
-        }
+        yield return new WaitForSeconds(5f);
 
         // Fade to white
         if (fadePanel != null)

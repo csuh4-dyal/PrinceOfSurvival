@@ -113,7 +113,6 @@ public class DialogueManager : MonoBehaviour
         }
 
         canvasGroup.alpha = 0;
-        dialoguePanel.SetActive(false);
         isActive = false;
 
         Time.timeScale = 1f;

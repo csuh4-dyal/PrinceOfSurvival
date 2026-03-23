@@ -22,10 +22,6 @@ public class IntroDialogue : MonoBehaviour
         {
             // Start dialogue
             DialogueManager.Instance.StartDialogue(introLines);
-
-            // Wait until dialogue finishes
-            yield return new WaitUntil(() => !DialogueManager.Instance.IsDialogueActive());
-
             // Now play BGM
             if (soundToPlay != null)
             {
