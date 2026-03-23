@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class Racket : MonoBehaviour
 {
@@ -18,7 +19,11 @@ public class Racket : MonoBehaviour
     private Rigidbody heldRb;
 
     private bool isSwinging = false; //prevents spam
-
+    private HungerBar hunger;
+    void Start()
+    {
+        hunger = FindFirstObjectByType<HungerBar>();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -109,6 +114,12 @@ public class Racket : MonoBehaviour
         obj.transform.localRotation = Quaternion.identity;
 
         Debug.Log("Object attached to holdPoint: " + obj.name);
+        if (hunger != null && heldObject.CompareTag("Food"))
+        {
+            hunger.AddHunger(20f);
+            Destroy(heldObject);
+            heldObject = null;
+        }
     }
 
     void Throw()

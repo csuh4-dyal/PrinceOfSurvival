@@ -5,7 +5,7 @@ using TMPro; // Use TextMeshPro for better UI text
 public class GameManager : MonoBehaviour
 {
     [Header("Lose Scene")]
-    [SerializeField] private string loseSceneName = "LoseScene";
+    [SerializeField] private string loseSceneName = "Lose";
 
     [Header("Duck Taming")]
     public int ducksRequiredToUnlock = 10;

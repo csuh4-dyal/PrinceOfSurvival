@@ -1,52 +1,59 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI; // for UI
+using UnityEngine.UI;
+using System;
 
 public class HungerBar : MonoBehaviour
 {
-    public Slider hungerBarSlider; // ref to hunger bar
-    public float maxHunger = 100f;
-    private float currentHunger;
-    public float hungerDepletionRate = .5f; // how fast hunger depletes
     public static event Action OnPlayerStarved;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Hunger Settings")]
+    public float maxHunger = 100f;
+    public float currentHunger;
+    public float hungerDrainRate = 2f; // per second
+
+    [Header("UI")]
+    public Image hungerFillImage; // assign UI Image (Fill type)
+
     void Start()
     {
         currentHunger = maxHunger;
-        hungerBarSlider.maxValue = maxHunger;
-        hungerBarSlider.value = currentHunger;
+        UpdateUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
-            if (currentHunger > 0)
-        {
-            DrainHungerBar(hungerDepletionRate * Time.deltaTime);
-        }
-        else
-        {
-            OnPlayerStarved?.Invoke();
-            enabled = false; // stop updating after death
-        }
-    }
-    public void DrainHungerBar(float drainBar) // - to hunger bar
-    {
-        currentHunger -= drainBar;
-        currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);//hunger cannot go below 0 or above 100
-        UpdateHungerBar();
+        DrainHunger();
     }
 
-    public void Eat(float eatFood) // ++ to hunger bar
+    void DrainHunger()
     {
-        currentHunger += eatFood;
+        if (currentHunger <= 0) return;
+
+        currentHunger -= hungerDrainRate * Time.deltaTime;
         currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);
-        UpdateHungerBar();
+
+        UpdateUI();
+
+        if (currentHunger <= 0)
+        {
+            Debug.Log("Player starved!");
+            OnPlayerStarved?.Invoke();
+        }
     }
 
-    private void UpdateHungerBar()
+    public void AddHunger(float amount)
     {
-        hungerBarSlider.value = currentHunger;
+        currentHunger += amount;
+        currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);
+
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        if (hungerFillImage != null)
+        {
+            hungerFillImage.fillAmount = currentHunger / maxHunger;
+        }
     }
 }
