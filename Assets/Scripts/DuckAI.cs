@@ -22,7 +22,7 @@ public class DuckAI : MonoBehaviour
 
     [Header("Taming")]
     public int minSeedsToTame = 2;
-    public int maxSeedsToTame = 5;
+    public int maxSeedsToTame = 3;
 
     private int seedsRequired;
     private int seedsFed = 0;
@@ -48,7 +48,7 @@ public class DuckAI : MonoBehaviour
         agent.autoBraking = false;
         agent.acceleration = 20f;
         agent.angularSpeed = 1000f;
-        agent.speed = 3f;
+        agent.speed = 4f;
 
         seedsRequired = Random.Range(minSeedsToTame, maxSeedsToTame + 1);
         state = DuckState.Wild;

@@ -80898,11 +80898,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -81054,15 +81054,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0b5ad52d1f3aa144b6fb44228e7f1a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 217
+      value: 193.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0b5ad52d1f3aa144b6fb44228e7f1a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.87
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0b5ad52d1f3aa144b6fb44228e7f1a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -166
+      value: -167.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0b5ad52d1f3aa144b6fb44228e7f1a4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -81211,7 +81211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a060c22c1dcc142a6b3b4e65e8c206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformerPlayerController
-  maxSpeed: 8
+  maxSpeed: 10
   acceleration: 50
   airAcceleration: 30
   friction: 20
@@ -82150,11 +82150,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82479,11 +82479,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82680,11 +82680,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82701,23 +82701,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e6d21695844b4324aa3cd36f3ecde6b6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 320.00003
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e6d21695844b4324aa3cd36f3ecde6b6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 320.00003
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e6d21695844b4324aa3cd36f3ecde6b6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 320.00003
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e6d21695844b4324aa3cd36f3ecde6b6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -71.03
+      value: -72.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e6d21695844b4324aa3cd36f3ecde6b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.81
+      value: 4.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e6d21695844b4324aa3cd36f3ecde6b6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -82796,8 +82796,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.023209464, y: 0.021292234, z: 0.026241714}
-  m_Center: {x: 0.0005290636, y: 0.01413958, z: 0.0007407499}
+  m_Size: {x: 0.035574134, y: 0.025867907, z: 0.03105598}
+  m_Center: {x: -0.0016504137, y: 0.011851767, z: -0.0016663759}
 --- !u!1 &849322896
 GameObject:
   m_ObjectHideFlags: 0
@@ -82909,6 +82909,7 @@ Transform:
   - {fileID: 1531987242}
   - {fileID: 951024517}
   - {fileID: 843740745}
+  - {fileID: 2008049038}
   - {fileID: 849322897}
   - {fileID: 1664501549}
   m_Father: {fileID: 1623116864}
@@ -83022,11 +83023,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -83446,7 +83447,7 @@ MonoBehaviour:
   offset: {x: 0, y: 1.5, z: 0}
   mouseSensitivity: 150
   verticalMultiplier: 1
-  horizontalMultiplier: 1
+  horizontalMultiplier: 1.5
   updatingRotation: 1
 --- !u!1001 &1017533274
 PrefabInstance:
@@ -83526,11 +83527,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -83861,11 +83862,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -84170,6 +84171,12 @@ MonoBehaviour:
   ducksRequiredToUnlock: 10
   cavePath: {fileID: 843740744}
   duckCounterText: {fileID: 428416795}
+  storyLines:
+  - (My kind... my body...)
+  - (Come...approach me......)
+  - Another voice...!
+  - I should go back to the mountain.
+  - 
 --- !u!4 &1406155989
 Transform:
   m_ObjectHideFlags: 0
@@ -84270,11 +84277,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85096,11 +85103,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85322,11 +85329,11 @@ PrefabInstance:
       objectReference: {fileID: 1406155988}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: maxSeedsToTame
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711458597197066735, guid: 463b49cfad6fe4c7ca05018d0513105d, type: 3}
       propertyPath: minSeedsToTame
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85379,7 +85386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SeedSpawner
   seedPrefab: {fileID: 4813013983652872740, guid: 1b04573102da3e943b96183cc881e439, type: 3}
   islandCollider: {fileID: 332824766}
-  spawnInterval: 3
+  spawnInterval: 15
   minSeedsPerSpawn: 5
   maxSeedsPerSpawn: 7
   maxSpawnAttempts: 10
@@ -85571,8 +85578,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 9.356625}
+  m_Center: {x: 0.0000000033644705, y: 8.976119e-10, z: -4.1783147}
 --- !u!23 &2008049036
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85639,11 +85646,11 @@ Transform:
   m_GameObject: {fileID: 2008049033}
   serializedVersion: 2
   m_LocalRotation: {x: 0.07182446, y: -0.38747868, z: -0.0028538138, w: 0.9190721}
-  m_LocalPosition: {x: -89.18, y: 9.76, z: -12.49}
-  m_LocalScale: {x: 17.462065, y: 14.681353, z: 0.32960165}
+  m_LocalPosition: {x: -89.18, y: 7.13, z: -11.7}
+  m_LocalScale: {x: 17.462067, y: 14.681352, z: 0.32960162}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 870838981}
   m_LocalEulerAnglesHint: {x: 7.459, y: -45.95, z: -3.522}
 --- !u!114 &2008049039
 MonoBehaviour:
@@ -85846,4 +85853,3 @@ SceneRoots:
   - {fileID: 423379784}
   - {fileID: 935523936}
   - {fileID: 1662432479}
-  - {fileID: 2008049038}

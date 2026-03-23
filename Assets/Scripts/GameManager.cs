@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro; // Use TextMeshPro for better UI text
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public TMP_Text duckCounterText; // Assign in inspector
+
+    [Header("Story Dialogue")]
+    [TextArea(3, 10)]
+    public string[] storyLines; // Dialogue to show after all ducks are tamed
 
     void Start()
     {
@@ -60,10 +64,16 @@ public class GameManager : MonoBehaviour
 
     void UnlockCavePath()
     {
-        if (cavePath != null && !cavePath.activeSelf)
+        if (cavePath != null && cavePath.activeSelf)
         {
             cavePath.SetActive(false);
             Debug.Log("Cave path unlocked! The ultimate duck awaits!");
+
+            // Trigger story dialogue
+            if (DialogueManager.Instance != null && storyLines.Length > 0)
+            {
+                DialogueManager.Instance.StartDialogue(storyLines);
+            }
         }
     }
 }
