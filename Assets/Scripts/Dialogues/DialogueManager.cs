@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -8,6 +9,9 @@ public class DialogueManager : MonoBehaviour
     [Header("UI")]
     public GameObject dialoguePanel;
     public TMP_Text dialogueText;
+    public CanvasGroup canvasGroup;
+    [Header("Fade Settings")]
+    public float fadeDuration = 0.5f;
 
     private string[] currentLines;
     private int currentIndex;
@@ -31,7 +35,6 @@ public class DialogueManager : MonoBehaviour
             NextLine();
         }
     }
-
     public void StartDialogue(string[] lines)
     {
         if (lines == null || lines.Length == 0) return;
@@ -42,6 +45,8 @@ public class DialogueManager : MonoBehaviour
 
         dialoguePanel.SetActive(true);
         ShowLine();
+
+        StartCoroutine(FadeIn());
 
         Time.timeScale = 0f;
     }
@@ -67,14 +72,50 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        dialoguePanel.SetActive(false);
-        isActive = false;
-
-        Time.timeScale = 1f;
+        StartCoroutine(FadeOut());
     }
 
     public bool IsDialogueActive()
     {
         return isActive;
+    }
+
+    IEnumerator FadeIn()
+    {
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+
+        float t = 0f;
+
+        while (t < fadeDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            canvasGroup.alpha = t / fadeDuration;
+            yield return null;
+        }
+
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    IEnumerator FadeOut()
+    {
+        canvasGroup.interactable = false;
+
+        float t = 0f;
+
+        while (t < fadeDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            canvasGroup.alpha = 1 - (t / fadeDuration);
+            yield return null;
+        }
+
+        canvasGroup.alpha = 0;
+        dialoguePanel.SetActive(false);
+        isActive = false;
+
+        Time.timeScale = 1f;
     }
 }
