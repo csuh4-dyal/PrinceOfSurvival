@@ -83444,9 +83444,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraControllerScript
   playerBody: {fileID: 423379786}
   offset: {x: 0, y: 1.5, z: 0}
-  mouseSensitivity: 200
-  verticalMultiplier: 1.5
-  horizontalMultiplier: 2
+  mouseSensitivity: 150
+  verticalMultiplier: 1
+  horizontalMultiplier: 1
   updatingRotation: 1
 --- !u!1001 &1017533274
 PrefabInstance:
@@ -83932,14 +83932,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 33ed0fc95f07fb74984402a8dede01ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4f3beeb4078f3c4aa15f6593dde3c6c, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
