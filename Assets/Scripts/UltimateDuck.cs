@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine.UI; // For fade panel
+using UnityEngine.UI;
 
 public class UltimateDuck : MonoBehaviour
 {
@@ -30,19 +30,21 @@ public class UltimateDuck : MonoBehaviour
 
     void Start()
     {
-        // Play initial BGM
-        if (bgmSource != null && initialBGM != null)
+        // Make the BGM persist across scenes
+        if (bgmSource != null)
         {
-            bgmSource.clip = initialBGM;
+            DontDestroyOnLoad(bgmSource.gameObject);
             bgmSource.loop = true;
-            bgmSource.Play();
+
+            if (initialBGM != null)
+            {
+                bgmSource.clip = initialBGM;
+                bgmSource.Play();
+            }
         }
 
-        // Make sure fade panel is transparent at start
         if (fadePanel != null)
-        {
             fadePanel.color = new Color(1, 1, 1, 0);
-        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -58,12 +60,11 @@ public class UltimateDuck : MonoBehaviour
 
     IEnumerator TriggerSequence(Transform player)
     {
-        // Change BGM
+        // Change BGM to triggered
         if (bgmSource != null && triggeredBGM != null)
         {
             bgmSource.Stop();
             bgmSource.clip = triggeredBGM;
-            bgmSource.loop = true;
             bgmSource.Play();
         }
 
@@ -75,8 +76,8 @@ public class UltimateDuck : MonoBehaviour
             Instantiate(duckPrefab, randomPos, Quaternion.identity);
         }
 
-        // Wait a short moment before starting dialogue
-        yield return new WaitForSeconds(5f);
+        // Wait a moment before fade
+        yield return new WaitForSeconds(1f);
 
         // Fade to white
         if (fadePanel != null)
@@ -102,5 +103,15 @@ public class UltimateDuck : MonoBehaviour
         }
 
         fadePanel.color = targetColor;
+    }
+
+    // Optional: stop BGM when going back to title
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "TitleScene" && bgmSource != null)
+        {
+            bgmSource.Stop();
+            Destroy(bgmSource.gameObject);
+        }
     }
 }
