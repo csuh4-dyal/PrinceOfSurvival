@@ -6,19 +6,26 @@ public class SeedSpawner : MonoBehaviour
     [Header("Seed")]
     public GameObject seedPrefab;
 
-    [Header("Island Area")]
-    public float islandWidth = 600f;
-    public float islandLength = 250f;
+    [Header("Island Reference")]
+    public Collider islandCollider; // Assign your island object
+
+    [Header("Spawn Settings")]
+    public float spawnInterval = 10f;
+    public int minSeedsPerSpawn = 5;
+    public int maxSeedsPerSpawn = 7;
+    public int maxSpawnAttempts = 20;
 
     [Header("Spawn Height")]
     public float spawnHeight = 50f;
 
-    [Header("Spawn Settings")]
-    public float spawnInterval = 30f;
-    public int maxSeedsPerSpawn = 7;
-    public int maxSpawnAttempts = 20;
     void Start()
     {
+        if (islandCollider == null)
+        {
+            Debug.LogError("SeedSpawner: No island collider assigned!");
+            return;
+        }
+
         StartCoroutine(SpawnSeeds());
     }
 
@@ -28,7 +35,7 @@ public class SeedSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnInterval);
 
-            int spawnAmount = Random.Range(0, maxSeedsPerSpawn + 1);
+            int spawnAmount = Random.Range(minSeedsPerSpawn, maxSeedsPerSpawn + 1);
 
             for (int i = 0; i < spawnAmount; i++)
             {
@@ -39,32 +46,28 @@ public class SeedSpawner : MonoBehaviour
 
     void TrySpawnSeed()
     {
-        int groundMask = LayerMask.GetMask("Ground");
+        Bounds bounds = islandCollider.bounds;
+
         for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
         {
-            float randomX = Random.Range(-islandWidth / 2f, islandWidth / 2f);
-            float randomZ = Random.Range(-islandLength / 2f, islandLength / 2f);
+            float randomX = Random.Range(bounds.min.x, bounds.max.x);
+            float randomZ = Random.Range(bounds.min.z, bounds.max.z);
 
-            Vector3 rayOrigin = new Vector3(randomX, spawnHeight, randomZ);
+            Vector3 rayOrigin = new Vector3(randomX, bounds.max.y + spawnHeight, randomZ);
 
-            // Cast downward and check if we hit the island
-            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, spawnHeight * 2f, groundMask))
+            // Raycast downward to find ground
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, spawnHeight * 2f))
             {
-                Debug.Log("Ray hit: " + hit.collider.name + " | Tag: " + hit.collider.tag + " | Layer: " + hit.collider.gameObject.layer);
-                if (hit.collider.CompareTag("GroundLayer"))
+                // Ensure we hit the island
+                if (hit.collider == islandCollider)
                 {
-                    // Spawn just above the hit point so it lands naturally
-                    Vector3 spawnPos = hit.point + Vector3.up * 1f;
+                    Vector3 spawnPos = hit.point + Vector3.up * 0.5f;
                     Instantiate(seedPrefab, spawnPos, Quaternion.identity);
-                    return; // success, stop trying
+                    return;
                 }
-            }
-            else
-            {
-                Debug.Log("Ray hit NOTHING - origin: " + rayOrigin);
             }
         }
 
-        Debug.Log("SeedSpawner: could not find a valid island spot after " + maxSpawnAttempts + " attempts.");
+        Debug.Log("SeedSpawner: Failed to find valid spawn position.");
     }
 }
