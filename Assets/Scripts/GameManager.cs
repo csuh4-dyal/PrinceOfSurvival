@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         UpdateDuckUI();
 
         if (cavePath != null)
-            cavePath.SetActive(false); // initially locked
+            cavePath.SetActive(true); // initially locked
     }
 
     void OnEnable()
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         if (cavePath != null && !cavePath.activeSelf)
         {
-            cavePath.SetActive(true);
+            cavePath.SetActive(false);
             Debug.Log("Cave path unlocked! The ultimate duck awaits!");
         }
     }
