@@ -1,95 +1,48 @@
 using UnityEngine;
 
-public class CameraControllerScript : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
-    [Header("Camera Settings")]
-    public float mouseSensitivity = 200f;
-    public Transform player; // Player object for movement
-    public float fadeDistance = 1.5f; // distance to start fading
-    public float minAlpha = 0.2f;     // minimum alpha when fully faded
+    public static CameraController instance;
+    public Transform playerBody; // Reference to the Player's Transform
+    public Vector3 offset;      // Optional offset for camera position
+    public float mouseSensitivity = 150f;
+    float xRotation = 0f;
+    public float verticalMultiplier = 2f;
+    public float horizontalMultiplier = 2f;
 
-    [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-
-    [Header("Vertical Clamp")]
-    public float minVerticalAngle = -90f;
-    public float maxVerticalAngle = 90f;
-
-    private float xRotation = 0f;
-    private float yRotation = 0f;
-    private Renderer[] playerRenderers;
-
+    public bool updatingRotation = true;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
+        // Lock cursor to the center of the screen and hide it
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        Vector3 euler = transform.rotation.eulerAngles;
-        xRotation = euler.x;
-        yRotation = euler.y;
-
-        if (player != null)
-            playerRenderers = player.GetComponentsInChildren<Renderer>();
     }
 
+
+    // Use LateUpdate to ensure the player has moved before the camera updates position
+    void LateUpdate()
+    {
+        // Set the camera's position to the player's position plus the offset
+        transform.position = playerBody.position + offset;
+    }
     void Update()
     {
-        HandleMouseRotation();
-        HandlePlayerMovement();
-        HandlePlayerFading();
-    }
+        if (!updatingRotation) return;
+        // Get mouse input
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * horizontalMultiplier *Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * verticalMultiplier * Time.deltaTime;
 
-    void HandleMouseRotation()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-        yRotation += mouseX;
+        // Calculate vertical rotation and clamp it so you can't flip upside down
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
-    }
-
-    void HandlePlayerMovement()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.forward * vertical + transform.right * horizontal;
-        move.y = 0f; // lock player to ground
-        player.position += move * moveSpeed * Time.deltaTime;
-    }
-
-    void HandlePlayerFading()
-    {
-        if (player == null || playerRenderers == null) return;
-
-        float distance = Vector3.Distance(transform.position, player.position);
-        float alpha = 1f;
-
-        if (distance < fadeDistance)
-        {
-            alpha = Mathf.Lerp(minAlpha, 1f, distance / fadeDistance);
-        }
-
-        foreach (Renderer r in playerRenderers)
-        {
-            foreach (Material mat in r.materials)
-            {
-                Color c = mat.color;
-                c.a = alpha;
-                mat.color = c;
-
-                // Enable transparency
-                mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                mat.SetInt("_ZWrite", 0);
-                mat.DisableKeyword("_ALPHATEST_ON");
-                mat.EnableKeyword("_ALPHABLEND_ON");
-                mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                mat.renderQueue = 3000;
-            }
-        }
+        // Apply rotations
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Camera tilts up/down
+        playerBody.Rotate(Vector3.up * mouseX); // Player body turns left/right
     }
 }
+
+
